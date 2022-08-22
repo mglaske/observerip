@@ -53,6 +53,14 @@ func (me *ObHandler) Close() {
 	me.server.Close()
 }
 
+func (me *ObHandler) GetStationResponse() StationResponse {
+	return me.stationResponse
+}
+
+func (me *ObHandler) GetEndpointResponse() EndpointResponse {
+	return me.endpointResponse
+}
+
 func New(port int) (*ObHandler, error) {
 	ctx := context.Background()
 	return NewWithContext(port, ctx)

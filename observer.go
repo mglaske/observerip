@@ -65,9 +65,11 @@ func NewWithContext(port int, ctx context.Context) (*ObHandler, error) {
 	}
 	mux := http.NewServeMux()
 	h.server = &http.Server{Addr: fmt.Sprintf(":%d", port), Handler: mux}
+
 	// Actual Weather Underground Endpoints SENT by ObserverIP
 	mux.HandleFunc("/weatherstation/updateweatherstation.php", h.stationResponse.Parse)
 	mux.HandleFunc("/endpoint", h.endpointResponse.Parse)
+
 	// Our Endpoints for polling stored data
 	mux.HandleFunc("/endpoints", h.GetEndpoints)
 	mux.HandleFunc("/info", h.GetInfo)
